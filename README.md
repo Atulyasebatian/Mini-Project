@@ -1,14 +1,16 @@
-The AI-Powered Smart Fare System modernizes fare collection in public transport by replacing manual ticketing with a contactless, AI-driven solution. Each bus has a unique QR code that passengers scan using a mobile app to select their destination. The system calculates fares automatically using AI validation and ensures accuracy, preventing misuse.
+# transitgo
 
-Payments are made securely through digital wallets (UPI, PayTM), with real-time monitoring by the admin. Automated fines handle payment failures or delays. Roles like Admin, Operator, and Passenger support efficient management through modules for user control, QR code handling, AI validation, payments, and complaints.
+A new Flutter project.
 
-Aligned with smart city initiatives, this scalable system enhances transparency, security, and passenger convenience.
+## Getting Started
 
+This project is a starting point for a Flutter application.
 
+A few resources to get you started if this is your first Flutter project:
 
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-
-
-
-
-
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
