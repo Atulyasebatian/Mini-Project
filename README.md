@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # transitgo
-=======
-# flutter_application_1
->>>>>>> 9cafba1 (commit 1)
 
 A new Flutter project.
 
