@@ -37,7 +37,6 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         // Save token for later use
-        String token = data['token'];
 
         // Navigate to Dashboard
         Navigator.pushReplacementNamed(context, '/dashboard');

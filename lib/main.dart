@@ -1,34 +1,17 @@
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'router.dart'; // provides appRouter
-=======
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:url_strategy/url_strategy.dart';
->>>>>>> 9cafba1 (commit 1)
 
 void main() {
   // remove hash from web URLs
   setPathUrlStrategy();
-<<<<<<< HEAD
-=======
-
-  // single entrypoint
->>>>>>> 9cafba1 (commit 1)
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-<<<<<<< HEAD
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -59,26 +42,6 @@ class MyApp extends StatelessWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 
-=======
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TransitGo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const LoginPage(), // 👈 Starts at Login Page
-    );
-  }
-}
-
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
->>>>>>> 9cafba1 (commit 1)
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
@@ -86,14 +49,6 @@ class _LoginPageState extends State<LoginPage> {
   final _passCtrl = TextEditingController();
   bool _loading = false;
 
-<<<<<<< HEAD
-=======
-  // Use 10.0.2.2 for Android Emulator, otherwise use localhost
-  final String _baseUrl = kIsWeb || !Platform.isAndroid
-      ? 'http://localhost:5000'
-      : 'http://10.0.2.2:5000';
-
->>>>>>> 9cafba1 (commit 1)
   @override
   void dispose() {
     _emailCtrl.dispose();
@@ -118,7 +73,6 @@ class _LoginPageState extends State<LoginPage> {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _loading = true);
 
-<<<<<<< HEAD
     // TODO: replace with real authentication request to backend
     await Future.delayed(const Duration(milliseconds: 400));
 
@@ -127,46 +81,6 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (_) => const MyHomePage(title: 'Home')),
     );
-=======
-    final url = Uri.parse('$_baseUrl/api/auth/login');
-    try {
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: json.encode({
-          'email': _emailCtrl.text,
-          'password': _passCtrl.text,
-        }),
-      );
-
-      final body = json.decode(response.body);
-
-      if (response.statusCode == 200) {
-        // Navigate to Home on success
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const MyHomePage(title: 'Home')),
-        );
-      } else {
-        // Show error message
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(body['message'] ?? 'Login failed'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    } catch (e) {
-      // Handle network or other errors
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error: ${e.toString()}'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    } finally {
-      setState(() => _loading = false);
-    }
->>>>>>> 9cafba1 (commit 1)
   }
 
   @override
@@ -206,14 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                               height: 16,
                               width: 16,
                               child: CircularProgressIndicator(
-<<<<<<< HEAD
                                   strokeWidth: 2, color: Colors.white))
-=======
-                                strokeWidth: 2,
-                                color: Colors.white,
-                              ),
-                            )
->>>>>>> 9cafba1 (commit 1)
                           : const Text('Login'),
                     ),
                   ),
@@ -223,13 +130,12 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-    )
+    );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-<<<<<<< HEAD
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -240,8 +146,6 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-=======
->>>>>>> 9cafba1 (commit 1)
   final String title;
 
   @override
@@ -252,7 +156,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
-<<<<<<< HEAD
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -261,14 +164,10 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
-=======
-    setState(() => _counter++);
->>>>>>> 9cafba1 (commit 1)
   }
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -302,15 +201,6 @@ class _MyHomePageState extends State<MyHomePage> {
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
-=======
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
->>>>>>> 9cafba1 (commit 1)
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text('You have pushed the button this many times:'),
@@ -325,14 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-<<<<<<< HEAD
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
-=======
-      ),
-    );
-  }
-}
->>>>>>> 9cafba1 (commit 1)
