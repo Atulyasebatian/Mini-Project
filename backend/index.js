@@ -2,6 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+<<<<<<< HEAD
+=======
+const authRoutes = require('./routes/auth'); // Import auth routes
+>>>>>>> 9cafba1 (commit 1)
 
 // Load environment variables from .env in root directory
 dotenv.config({ path: '../.env' });
@@ -87,7 +91,18 @@ app.get('/', (req, res) => {
   res.send('Express backend is running!');
 });
 
+<<<<<<< HEAD
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
+=======
+// Use auth routes
+app.use('/api/auth', authRoutes);
+
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
+>>>>>>> 9cafba1 (commit 1)

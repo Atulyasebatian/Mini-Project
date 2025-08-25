@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   go_router: ^16.2.0
   url_strategy: ^0.3.0
+<<<<<<< HEAD
+=======
+  http: ^1.5.0
+>>>>>>> 9cafba1 (commit 1)
 
 dev_dependencies:
   flutter_test:
@@ -60,8 +64,13 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+<<<<<<< HEAD
   # assets:
   #   - images/a_dot_burr.jpeg
+=======
+  assets:
+    - assets/
+>>>>>>> 9cafba1 (commit 1)
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -11,7 +11,11 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
+<<<<<<< HEAD
 .env
+=======
+node_modules/
+>>>>>>> 9cafba1 (commit 1)
 
 # IntelliJ related
 *.iml
