@@ -1,20 +1,17 @@
-// File: /src/pages/signup.js
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/signup.css";
 
 function SignupPage() {
-  const [role, setRole] = useState("Passenger");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // State for error messages
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Clear previous errors
+    setError("");
 
     try {
       const res = await fetch('http://localhost:5000/api/auth/signup', {
@@ -22,19 +19,19 @@ function SignupPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ fullName, email, password, role }),
+        // 'role' is not sent; backend defaults to 'Passenger'
+        body: JSON.stringify({ fullName, email, password }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        // If server responds with an error, display it
         throw new Error(data.msg || 'Failed to sign up');
       }
 
       console.log("Sign Up successful:", data);
-      // Navigate to login page on successful registration
-      navigate("/");
+      alert('Registration successful! Please log in.'); // Give user feedback
+      navigate("/"); // Navigate to login page
 
     } catch (err) {
       console.error(err);
@@ -59,37 +56,9 @@ function SignupPage() {
             <h2 className="fw-bold text-white m-0">TransitGo</h2>
           </div>
           <h3 className="fw-bold text-white">Create an Account</h3>
-          <p className="text-light">Choose your role to get started.</p>
+          <p className="text-light">Sign up to start your journey.</p>
         </div>
 
-        {/* Role Selection */}
-        <div className="mb-4">
-          <p className="text-white fw-medium">Choose your role</p>
-          <div className="d-flex gap-3">
-            <button
-              type="button"
-              onClick={() => setRole("Passenger")}
-              className={`btn flex-fill d-flex flex-column align-items-center p-3 rounded glassmorphism role-btn ${
-                role === "Passenger" ? "active" : ""
-              }`}
-            >
-              <span className="material-icons fs-2">person</span>
-              <span className="fw-semibold mt-2">Passenger</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setRole("Operator")}
-              className={`btn flex-fill d-flex flex-column align-items-center p-3 rounded glassmorphism role-btn ${
-                role === "Operator" ? "active" : ""
-              }`}
-            >
-              <span className="material-icons fs-2">engineering</span>
-              <span className="fw-semibold mt-2">Operator</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Form */}
         <form onSubmit={handleSubmit}>
           {error && <div className="alert alert-danger">{error}</div>}
           <div className="mb-3">
@@ -128,7 +97,7 @@ function SignupPage() {
               id="password"
               className="form-control glassmorphism-input"
               value={password}
-              onChange={(e) => setPassword(e.target.value)} // <-- FIX: e.g.value to e.target.value
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>

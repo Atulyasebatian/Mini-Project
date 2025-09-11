@@ -1,0 +1,43 @@
+.dashboard-page .page-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.stat-card {
+  background-color: var(--admin-card-bg);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.stat-label { font-size: 0.9rem; color: var(--admin-text-secondary); margin: 0; }
+.stat-value { font-size: 1.5rem; font-weight: 600; margin: 0.25rem 0 0; }
+.stat-icon-wrapper {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; justify-content: center; align-items: center;
+  color: #fff;
+}
+.stat-icon-wrapper.blue { background-color: #007aff; }
+.stat-icon-wrapper.green { background-color: var(--admin-green); }
+.stat-icon-wrapper.yellow { background-color: #ffcc00; }
+.stat-icon-wrapper.pink { background-color: #ff2d55; }
+.recent-activity { margin-top: 2rem; }
+.activity-header { display: flex; justify-content: space-between; align-items: center; }
+.section-title { font-size: 1.2rem; }
+.view-all-link { color: var(--admin-primary); text-decoration: none; font-weight: 500; }
+.activity-item { display: flex; align-items: center; gap: 1rem; margin-top: 1rem; }
+.activity-icon-wrapper {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  display: flex; justify-content: center; align-items: center;
+  color: #fff;
+}
+.activity-title { margin: 0; font-weight: 500; font-size: 0.9rem; }
+.activity-time { margin: 0.2rem 0 0; color: var(--admin-text-secondary); font-size: 0.8rem; }

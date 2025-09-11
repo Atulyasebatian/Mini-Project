@@ -1,18 +1,17 @@
-// File: /src/pages/login.js
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { jwtDecode } from 'jwt-decode';
 import "../styles/login.css";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // State for error messages
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(""); // Clear previous errors
+    setError("");
 
     try {
       const res = await fetch('http://localhost:5000/api/auth/login', {
@@ -29,14 +28,24 @@ function LoginPage() {
           throw new Error(data.msg || 'Failed to log in');
       }
 
-      // Login successful, we have a token
-      console.log('Login successful, token:', data.token);
+      const token = data.token;
+      localStorage.setItem('token', token);
       
-      // Store the token for future authenticated requests
-      localStorage.setItem('token', data.token);
-      
-      // Navigate to the dashboard
-      navigate("/dashboard");
+      const decodedToken = jwtDecode(token);
+      const userRole = decodedToken.user.role;
+
+      // FIX: Updated logic to redirect both 'Operator' and 'Admin' to the dashboard.
+      if (userRole === 'Admin') {
+        navigate("/admin/dashboard");
+      } else if (userRole === 'Operator') {
+        navigate("/operator/dashboard");
+      } else if (userRole === 'Passenger') {
+        navigate("/home"); // Redirect Passengers to a home page
+      } else {
+        // Fallback for any other roles or issues
+        setError("Login successful, but role is unrecognized.");
+        navigate("/");
+      }
 
     } catch (err) {
       console.error(err);
@@ -56,8 +65,8 @@ function LoginPage() {
           <span className="material-icons">directions_bus</span>
           TransitGo
         </h1>
-        <h2 className="welcome">Welcome Back, Admin</h2>
-        <p className="subtitle">Log in to the dashboard</p>
+        <h2 className="welcome">Welcome Back</h2>
+        <p className="subtitle">Log in to your account</p>
 
         <form onSubmit={handleLogin}>
           {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -71,7 +80,7 @@ function LoginPage() {
           />
           <div className="password-group">
             <label htmlFor="password">Password</label>
-            <a href="#" className="forgot">
+            <a href="/forgot-password" className="forgot">
               Forgot Password?
             </a>
           </div>
@@ -88,8 +97,8 @@ function LoginPage() {
         </form>
 
         <p className="signup" style={{ marginTop: '25px' }}>
-          Don't have an admin account?{" "}
-          <Link to="/signup">Create one here</Link>
+          Don't have an account?{" "}
+          <Link to="/signup">Sign Up</Link>
         </p>
       </div>
     </div>

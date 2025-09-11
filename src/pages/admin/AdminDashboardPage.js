@@ -97,10 +97,10 @@ const Dashboard = () => {
           <div className="d-flex justify-content-around align-items-center py-3">
             {[
               { name: "Dashboard", icon: "dashboard", active: true, path: "/dashboard" },
-              { name: "Users", icon: "groups", path: "#" },
-              { name: "Vehicles", icon: "directions_bus", path: "#" },
-              { name: "Operators", icon: "engineering", path: "#" },
-              { name: "Fares", icon: "receipt", path: "#" },
+              { name: "Users", icon: "groups", path: "/admin/users" },
+              { name: "Vehicles", icon: "directions_bus", path: "/admin/vehicles" },
+              { name: "Operators", icon: "engineering", path: "/admin/operators" },
+              { name: "Fares", icon: "receipt", path: "/admin/fares" },
             ].map((item, index) => (
               <Link
                 key={index}

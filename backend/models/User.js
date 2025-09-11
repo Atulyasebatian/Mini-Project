@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['Passenger', 'Operator'], // Defines the possible roles
+    enum: ['Passenger', 'Operator','Admin'], // Defines the possible roles
     default: 'Passenger',
   },
   date: {

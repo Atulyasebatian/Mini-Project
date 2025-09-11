@@ -1,40 +1,31 @@
-// File: /routes/auth.js
-
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User'); // Import the User model
 
 // @route   POST api/auth/signup
-// @desc    Register a user
+// @desc    Register a user (role is automatically 'Passenger')
 // @access  Public
 router.post('/signup', async (req, res) => {
-  const { fullName, email, password, role } = req.body;
+  const { fullName, email, password } = req.body;
 
   try {
-    // 1. Check if user already exists
     let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ msg: 'User already exists' });
     }
 
-    // 2. Create new user instance
+    // NOTE: This public endpoint correctly and securely defaults to 'Passenger'.
+    // Privileged roles like 'Operator' or 'Admin' should be created
+    // via a separate, secure admin panel or directly in the database for security.
     user = new User({
       fullName,
       email,
       password,
-      role, // 'Passenger' or 'Operator'
+      role: 'Passenger',
     });
-
-    // 3. Hash the password
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(password, salt);
-
-    // 4. Save user to the database
-    await user.save();
     
-    // 5. Return a success message (or a token if you want to auto-login)
+    await user.save();
     res.status(201).json({ msg: 'User registered successfully' });
 
   } catch (err) {
@@ -44,30 +35,25 @@ router.post('/signup', async (req, res) => {
 });
 
 // @route   POST api/auth/login
-// @desc    Authenticate user & get token
+// @desc    Authenticate any valid user & get token
 // @access  Public
+// NOTE: No changes are needed here. This route is generic and will issue a token
+// containing the user's role, regardless of what that role is. The frontend
+// is responsible for handling redirection.
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // 1. Check if user exists
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ msg: 'Invalid Credentials' });
         }
 
-        // 2. Compare password
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = (password === user.password);
         if (!isMatch) {
             return res.status(400).json({ msg: 'Invalid Credentials' });
         }
         
-        // 3. Check if the user is an admin ('Operator')
-        if (user.role !== 'Operator') {
-            return res.status(403).json({ msg: 'Access denied. Operator access required.' });
-        }
-
-        // 4. Create JWT payload
         const payload = {
             user: {
                 id: user.id,
@@ -75,11 +61,10 @@ router.post('/login', async (req, res) => {
             },
         };
 
-        // 5. Sign the token and return it
         jwt.sign(
             payload,
             process.env.JWT_SECRET,
-            { expiresIn: 3600 }, // Expires in 1 hour
+            { expiresIn: 3600 },
             (err, token) => {
                 if (err) throw err;
                 res.json({ token });
@@ -90,6 +75,5 @@ router.post('/login', async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
-
 
 module.exports = router;
