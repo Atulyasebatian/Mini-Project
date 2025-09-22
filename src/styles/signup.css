@@ -1,78 +1,82 @@
-/* Wrapper for the entire signup page */
+/* Fullscreen background */
 .signup-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
-  position: relative; /* Required for the overlay */
+  width: 100%;
   background-size: cover;
   background-position: center;
-  font-family: 'Poppins', sans-serif; /* Optional: Use a nice font */
+  position: relative;
 }
 
-/* Dark overlay that sits on top of the background image */
+/* Dark overlay */
 .signup-overlay {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
   height: 100%;
-  background-color: #000;
-  opacity: 0.5;
-}
-
-/* The main signup card container */
-.signup-card {
-  position: relative; /* Ensures the card is on top of the overlay */
-  z-index: 1;
   width: 100%;
-  max-width: 420px;
-  padding: 2.5rem 2rem;
-  border-radius: 1.25rem; /* 20px */
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  background: rgba(0, 0, 0, 0.6);
 }
 
-/* Reusable Glassmorphism effect */
+/* Card container */
+.signup-card {
+  position: relative;
+  z-index: 2;
+  border-radius: 16px;
+  padding: 25px;
+  max-width: 380px;
+  width: 100%;
+  margin: 0 auto;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+/* Glass effect */
 .glassmorphism {
-  background: rgba(35, 35, 35, 0.6);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Style for the form inputs with the glass effect */
+/* Input fields */
 .glassmorphism-input {
-  background: rgba(255, 255, 255, 0.15) !important; /* !important to override Bootstrap defaults */
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: #fff !important;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
 }
-
 .glassmorphism-input::placeholder {
-  color: #ccc;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.glassmorphism-input:focus {
-  background: rgba(255, 255, 255, 0.25) !important;
-  box-shadow: none !important; /* Remove Bootstrap's default focus glow */
-  color: #fff !important;
-}
-
-/* Styling for the role selection buttons */
+/* Role buttons */
 .role-btn {
-  /* Common styles for both buttons */
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-  border: 1px solid transparent; /* Set initial border for a smooth transition */
-  color: #e0e0e0;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  color: white;
+  font-weight: 500;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
-
 .role-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.25);
+}
+.role-btn.active {
+  border-color: #007bff;
+  background: rgba(0, 123, 255, 0.25);
 }
 
-/* Style for the currently active role button */
-.role-btn.active {
-  border-color: #fff;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
+/* Error box */
+.error-box {
+  background: rgba(255, 0, 0, 0.15);
+  color: #ffbaba;
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 14px;
 }

@@ -48,9 +48,7 @@ const AdminLayout = ({ children }) => {
             <span className="nav-label">{item.label}</span>
           </Link>
         ))}
-        {currentPath === '/admin/dashboard' && (
-             <button className="fab">+</button>
-        )}
+        {/* The floating action button has been removed from here. */}
       </footer>
     </div>
   );
