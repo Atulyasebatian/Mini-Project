@@ -1,6 +1,4 @@
-// File: /models/User.js
-
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
   fullName: {
@@ -18,13 +16,15 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['Passenger', 'Operator','Admin'], // Defines the possible roles
+    enum: ['Passenger', 'Operator','Admin'],
     default: 'Passenger',
   },
+  // The 'date' field is redundant when using timestamps, but we can leave it for now.
   date: {
     type: Date,
     default: Date.now,
   },
-});
+}, { timestamps: true }); // <<< ADD THIS OPTION
 
-module.exports = mongoose.model('user', UserSchema);
+const User = mongoose.model('user', UserSchema);
+export default User;

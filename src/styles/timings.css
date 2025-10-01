@@ -1,0 +1,103 @@
+/* --- Passenger Timings Page --- */
+:root {
+  --passenger-bg: #f4f5f9;
+  --primary-blue: #2979ff;
+  --card-bg: #ffffff;
+  --text-dark: #212529;
+  --text-light: #6c757d;
+  --border-color: #e0e0e0;
+  --status-green: #198754;
+  --status-red: #dc3545;
+  --status-blue: #0d6efd;
+  --status-green-bg: #d1e7dd;
+  --status-red-bg: #f8d7da;
+  --status-blue-bg: #cfe2ff;
+}
+.timings-page {
+  background-color: var(--passenger-bg);
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  padding-bottom: 70px;
+}
+
+/* Header */
+.passenger-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 1.5rem; background-color: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+.menu-btn { background: none; border: none; font-size: 24px; color: var(--text-dark); }
+.brand-center h1 {
+  font-size: 1.25rem; font-weight: 600; margin: 0; color: var(--text-dark);
+}
+.header-actions {
+  display: flex; align-items: center; gap: 1rem;
+}
+.header-actions .material-icons { font-size: 24px; color: var(--text-light); }
+.profile-pic { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+
+/* Main Content */
+.timings-main {
+  padding: 1.5rem;
+}
+.hero-section {
+  margin-bottom: 2rem;
+}
+.hero-section h2 { font-size: 1.8rem; font-weight: 700; color: var(--text-dark); }
+.hero-section p { font-size: 1rem; color: var(--text-light); }
+.search-bar {
+  display: flex; align-items: center; gap: 0.75rem;
+  background-color: var(--card-bg); border-radius: 12px;
+  padding: 0.75rem 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.search-bar .material-icons { color: var(--text-light); }
+.search-bar input {
+  border: none; outline: none; width: 100%; font-size: 1rem; background: none;
+}
+
+/* Upcoming Buses */
+.upcoming-buses h3 {
+  font-size: 1.25rem; font-weight: 600; color: var(--text-dark); margin-bottom: 1rem;
+}
+.bus-list {
+  display: grid; gap: 1rem;
+}
+.bus-card {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  background-color: var(--card-bg); border-radius: 16px;
+  padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.bus-info h4 { font-size: 1.1rem; font-weight: 600; margin: 0 0 0.25rem 0; }
+.bus-info p { margin: 0 0 0.5rem 0; color: var(--text-light); }
+.bus-info strong { color: var(--text-dark); }
+.bus-info span { font-size: 0.9rem; color: var(--text-light); }
+.status-badge {
+  font-size: 0.75rem; font-weight: 500; padding: 0.3rem 0.75rem; border-radius: 99px;
+}
+.status-badge.on-time { color: var(--status-green); background-color: var(--status-green-bg); }
+.status-badge.delayed { color: var(--status-red); background-color: var(--status-red-bg); }
+.status-badge.scheduled { color: var(--status-blue); background-color: var(--status-blue-bg); }
+
+/* Loading / Error States */
+.status-indicator {
+  text-align: center; padding: 2rem; color: var(--text-light);
+}
+.status-indicator.error {
+  color: var(--status-red);
+}
+
+/* Bottom Nav (re-using from home.css, ensure these are consistent) */
+.passenger-bottom-nav {
+  position: fixed; bottom: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-around; background: var(--card-bg);
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1); padding-top: 0.5rem;
+}
+.passenger-bottom-nav .nav-item {
+  display: flex; flex-direction: column; align-items: center;
+  text-decoration: none; color: var(--text-light);
+  font-size: 0.75rem; padding: 0.25rem; transition: color 0.2s;
+}
+.nav-item .nav-label { margin-top: 2px; }
+.passenger-bottom-nav .nav-item.active {
+  color: var(--primary-blue); font-weight: 500;
+}

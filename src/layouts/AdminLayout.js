@@ -1,9 +1,11 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+// 1. Import useNavigate along with other hooks
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../styles/adminLayout.css';
 
 const AdminLayout = ({ children }) => {
   const location = useLocation();
+  const navigate = useNavigate(); // 2. Initialize the navigate function
   const currentPath = location.pathname;
 
   const navItems = [
@@ -13,6 +15,14 @@ const AdminLayout = ({ children }) => {
     { path: '/admin/vehicles', icon: 'directions_bus', label: 'Vehicles' },
     { path: '/admin/fares', icon: 'receipt_long', label: 'Fares' },
   ];
+
+  // 3. Create the function to handle logout
+  const handleLogout = () => {
+    // Clear the user's token from storage
+    localStorage.removeItem('token');
+    // Redirect to the login page
+    navigate('/');
+  };
 
   return (
     <div className="admin-layout">
@@ -29,8 +39,12 @@ const AdminLayout = ({ children }) => {
             <span className="material-icons">notifications</span>
             <span className="notification-badge">3</span>
           </button>
-          <img src="https://i.pravatar.cc/150?img=3" alt="Admin" className="profile-pic" />
-        </div>
+          &nbsp; <img src="https://i.pravatar.cc/150?img=3" alt="Admin" className="profile-pic" />&nbsp;
+          {/* 4. Add the new logout button with an icon */}
+          <button onClick={handleLogout} className="header-action-btn" title="Logout">
+            <span className="material-icons">logout</span>
+          </button>
+      </div>
       </header>
       
       <main className="admin-main-content">
@@ -48,7 +62,6 @@ const AdminLayout = ({ children }) => {
             <span className="nav-label">{item.label}</span>
           </Link>
         ))}
-        {/* The floating action button has been removed from here. */}
       </footer>
     </div>
   );

@@ -1,0 +1,161 @@
+/* --- Vehicle Management Page --- */
+
+.vehicle-management-page .page-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--admin-text-primary);
+}
+
+.page-subtitle {
+  color: var(--admin-text-secondary);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* Form Card */
+.form-card {
+  background-color: var(--admin-card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--admin-text-primary);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--admin-border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--admin-background);
+  color: var(--admin-text-primary); /* Ensure default text is black */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Added for focus transition */
+}
+
+/* --- NEW: Style for when an input field is focused (clicked on) --- */
+.form-group input:focus {
+  outline: none;
+  border-color: var(--admin-primary);
+  box-shadow: 0 0 0 3px rgba(88, 86, 214, 0.15);
+}
+
+/* --- NEW: This is the fix for the autofill text color --- */
+/* Targets the browser's autofill styles */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover, 
+.form-group input:-webkit-autofill:focus, 
+.form-group input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--admin-text-primary); /* Force text color to be black */
+    -webkit-box-shadow: 0 0 0 30px var(--admin-background) inset !important; /* Keep the background color consistent */
+    box-shadow: 0 0 0 30px var(--admin-background) inset !important;
+}
+
+
+.register-btn {
+  width: 100%;
+  background-color: var(--admin-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.register-btn:hover {
+  background-color: #4a48c2;
+}
+
+.error-message {
+  color: var(--admin-red);
+  background-color: rgba(255, 59, 48, 0.1);
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Registered Vehicles List */
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--admin-text-primary);
+  margin-bottom: 1rem;
+}
+
+.empty-state {
+  background-color: var(--admin-card-bg);
+  border-radius: 12px;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: var(--admin-text-secondary);
+}
+
+.empty-icon { font-size: 48px; color: #c7c7cc; }
+.empty-title { font-size: 1.1rem; font-weight: 600; margin: 1rem 0 0.5rem; color: var(--admin-text-primary); }
+.empty-subtitle { margin: 0; font-size: 0.9rem; }
+
+.vehicles-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.vehicle-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--admin-card-bg);
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.vehicle-info .vehicle-model {
+  font-weight: 600;
+  color: var(--admin-text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.vehicle-info .vehicle-details {
+  font-size: 0.85rem;
+  color: var(--admin-text-secondary);
+  margin: 0;
+}
+
+.delete-btn {
+  background: var(--admin-background);
+  color: var(--admin-text-secondary);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.delete-btn:hover {
+  background-color: #ff3b30;
+  color: white;
+}

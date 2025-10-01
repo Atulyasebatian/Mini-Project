@@ -38,8 +38,34 @@ body {
 .menu-btn { background: none; border: none; cursor: pointer; }
 .header-brand { display: flex; align-items: center; gap: 0.5rem; color: var(--admin-primary); }
 .header-brand h1 { font-size: 1.2rem; margin: 0; }
-.header-actions { display: flex; align-items: center; gap: 1rem; }
-.notification-btn { background: none; border: none; position: relative; cursor: pointer; }
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Adjusted for better spacing with the new button */
+}
+
+/* --- NEW: Generic style for all icon buttons in the header --- */
+.notification-btn, .header-action-btn {
+  background: none;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  color: var(--admin-text-secondary); /* Default icon color */
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; /* Make it circular for a better hover effect */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* --- NEW: Hover effect for all header icon buttons --- */
+.notification-btn:hover, .header-action-btn:hover {
+  background-color: var(--admin-background); /* Use the main background for a subtle hover */
+  color: var(--admin-primary);    /* Highlight with primary color on hover */
+}
+
+
 .notification-badge {
   position: absolute;
   top: -2px; right: -4px;

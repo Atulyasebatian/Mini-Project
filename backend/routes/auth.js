@@ -1,13 +1,14 @@
-const express = require('express');
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js'; // Import the User model
+
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Import the User model
 
 // @route   POST api/auth/signup
-// @desc    Register a user (role is automatically 'Passenger')
+// @desc    Register a user
 // @access  Public
 router.post('/signup', async (req, res) => {
-  const { fullName, email, password } = req.body;
+  const { fullName, email, password, role } = req.body;
 
   try {
     let user = await User.findOne({ email });
@@ -15,14 +16,11 @@ router.post('/signup', async (req, res) => {
       return res.status(400).json({ msg: 'User already exists' });
     }
 
-    // NOTE: This public endpoint correctly and securely defaults to 'Passenger'.
-    // Privileged roles like 'Operator' or 'Admin' should be created
-    // via a separate, secure admin panel or directly in the database for security.
     user = new User({
       fullName,
       email,
       password,
-      role: 'Passenger',
+      role, // Role is taken from request body
     });
     
     await user.save();
@@ -37,9 +35,6 @@ router.post('/signup', async (req, res) => {
 // @route   POST api/auth/login
 // @desc    Authenticate any valid user & get token
 // @access  Public
-// NOTE: No changes are needed here. This route is generic and will issue a token
-// containing the user's role, regardless of what that role is. The frontend
-// is responsible for handling redirection.
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -49,7 +44,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ msg: 'Invalid Credentials' });
         }
 
-        const isMatch = (password === user.password);
+        const isMatch = (password === user.password); // Plain text password check
         if (!isMatch) {
             return res.status(400).json({ msg: 'Invalid Credentials' });
         }
@@ -63,7 +58,7 @@ router.post('/login', async (req, res) => {
 
         jwt.sign(
             payload,
-            process.env.JWT_SECRET,
+            process.env.JWT_SECRET || 'jwtSecret', // Fallback secret
             { expiresIn: 3600 },
             (err, token) => {
                 if (err) throw err;
@@ -76,4 +71,4 @@ router.post('/login', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

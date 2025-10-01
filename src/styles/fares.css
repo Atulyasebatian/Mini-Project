@@ -1,0 +1,80 @@
+/* --- Fare Collection Page --- */
+
+.fares .page-title {
+  font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--admin-text-primary);
+}
+.page-subtitle {
+  color: var(--admin-text-secondary); margin-top: 0; margin-bottom: 1.5rem;
+}
+
+/* Summary Card */
+.summary-card {
+  background-color: var(--admin-card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.summary-card .form-group label {
+  display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--admin-text-primary);
+}
+.summary-card input[type="date"] {
+  width: 100%; padding: 0.75rem; border: 1px solid var(--admin-border-color); border-radius: 8px; font-size: 1rem; background-color: var(--admin-background);
+}
+.revenue-total {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--admin-border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.revenue-total .total-label {
+  font-size: 1rem; font-weight: 500; color: var(--admin-text-secondary);
+}
+.revenue-total .total-amount {
+  font-size: 1.5rem; font-weight: 700; color: var(--admin-green);
+}
+
+/* Collections List */
+.section-title {
+  font-size: 1.2rem; font-weight: 600; color: var(--admin-text-primary); margin-bottom: 1rem;
+}
+.loading-message {
+  text-align: center; color: var(--admin-text-secondary); padding: 2rem;
+}
+.empty-state {
+  background-color: var(--admin-card-bg); border-radius: 12px; padding: 2.5rem 1rem; text-align: center; color: var(--admin-text-secondary);
+}
+.empty-icon { font-size: 48px; color: #c7c7cc; }
+.empty-title { font-size: 1.1rem; font-weight: 600; margin: 1rem 0 0.5rem; color: var(--admin-text-primary); }
+.empty-subtitle { margin: 0; font-size: 0.9rem; }
+
+.collections-list {
+  display: grid; gap: 0.75rem;
+}
+.collection-card {
+  display: flex; align-items: center; gap: 1rem; background-color: var(--admin-card-bg); padding: 1rem; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.vehicle-icon-wrapper {
+  background-color: var(--admin-background); color: var(--admin-text-secondary); min-width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+}
+.collection-info {
+  flex-grow: 1;
+}
+.collection-info .vehicle-model {
+  font-weight: 600; color: var(--admin-text-primary); margin: 0 0 0.25rem 0;
+}
+.collection-info .vehicle-details {
+  font-size: 0.85rem; color: var(--admin-text-secondary); margin: 0;
+}
+.collection-amount {
+  font-size: 1.1rem; font-weight: 600; color: var(--admin-primary); margin: 0;
+}
+.error-message {
+  color: var(--admin-red);
+  background-color: rgba(255, 59, 48, 0.1);
+  padding: 0.75rem;
+  border-radius: 8px;
+  text-align: center;
+}

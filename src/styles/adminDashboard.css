@@ -1,43 +1,174 @@
+/* --- Admin Dashboard Page --- */
+
 .dashboard-page .page-title {
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
+  color: var(--admin-text-primary);
 }
+
+/* --- Statistics Grid --- */
 .stats-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr); /* Default to 2 columns for mobile */
   gap: 1rem;
 }
+
 .stat-card {
   background-color: var(--admin-card-bg);
   border-radius: 12px;
-  padding: 1rem;
+  padding: 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.stat-label { font-size: 0.9rem; color: var(--admin-text-secondary); margin: 0; }
-.stat-value { font-size: 1.5rem; font-weight: 600; margin: 0.25rem 0 0; }
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--admin-text-secondary);
+  margin: 0;
+  font-weight: 500;
+}
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0.25rem 0 0;
+  color: var(--admin-text-primary);
+}
 .stat-icon-wrapper {
-  width: 40px; height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  display: flex; justify-content: center; align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #fff;
 }
 .stat-icon-wrapper.blue { background-color: #007aff; }
 .stat-icon-wrapper.green { background-color: var(--admin-green); }
 .stat-icon-wrapper.yellow { background-color: #ffcc00; }
 .stat-icon-wrapper.pink { background-color: #ff2d55; }
-.recent-activity { margin-top: 2rem; }
-.activity-header { display: flex; justify-content: space-between; align-items: center; }
-.section-title { font-size: 1.2rem; }
-.view-all-link { color: var(--admin-primary); text-decoration: none; font-weight: 500; }
-.activity-item { display: flex; align-items: center; gap: 1rem; margin-top: 1rem; }
-.activity-icon-wrapper {
-  width: 40px; height: 40px;
+
+
+/* --- Recent Activity Section --- */
+.recent-activity {
+  margin-top: 2.5rem;
+}
+
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--admin-text-primary);
+}
+
+.view-all-link {
+  color: var(--admin-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.view-all-link:hover {
+  color: #4a48c2;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--admin-card-bg);
+  padding: 1rem;
   border-radius: 12px;
-  display: flex; justify-content: center; align-items: center;
+  margin-top: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* --- NEW: Add this style for the user avatar --- */
+.activity-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px; /* A soft 'squircle' shape */
+  object-fit: cover;   /* Prevents the image from being stretched */
+}
+
+
+.activity-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #fff;
 }
-.activity-title { margin: 0; font-weight: 500; font-size: 0.9rem; }
-.activity-time { margin: 0.2rem 0 0; color: var(--admin-text-secondary); font-size: 0.8rem; }
+.activity-title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--admin-text-primary);
+}
+.activity-time {
+  margin: 0.2rem 0 0;
+  color: var(--admin-text-secondary);
+  font-size: 0.8rem;
+}
+
+
+/* --- Styles for Dynamic States --- */
+.loading-text {
+  text-align: center;
+  padding: 2rem;
+  color: var(--admin-text-secondary);
+}
+.error-banner {
+  background-color: rgba(255, 59, 48, 0.1);
+  color: var(--admin-red);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+}
+.empty-state {
+  background-color: var(--admin-card-bg);
+  border-radius: 12px;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: var(--admin-text-secondary);
+  margin-top: 1rem;
+}
+.empty-icon {
+  font-size: 48px;
+  color: #c7c7cc;
+}
+.empty-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+  color: var(--admin-text-primary);
+}
+.empty-subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+
+/* --- Responsive Grid for Larger Screens --- */
+@media (min-width: 992px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

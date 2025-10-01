@@ -1,47 +1,58 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-// Public & User-facing Pages
-import LoginPage from "./pages/login"; 
-import SignupPage from "./pages/signup"; 
-import HomePage from "./pages/HomePage";
+// --- Import all pages ---
+
+// Public Pages
+import LoginPage from "./pages/login";
+import SignupPage from "./pages/signup";
 import NotFound from "./pages/NotFound";
 
-// New Mobile-First Admin Pages
+// Passenger Pages
+import HomePage from "./pages/passenger/Home"; 
+import TimingsPage from "./pages/passenger/TimingsPage";
+import PaymentPage from "./pages/passenger/PaymentPage";
+// Operator Pages
+import OperatorDashboard from "./pages/operator/Dashboard";
+import OperatorRoutesPage from "./pages/operator/OperatorRoutesPage";
+
+// Admin Pages
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 import UserManagementPage from "./pages/admin/UserManagementPage";
 import AssignOperatorsPage from "./pages/admin/AssignOperatorsPage";
-import OperatorDashboardPage from "./pages/DashboardPage";
+import Vehicle from "./pages/admin/Vehicle"; 
+import Faresmgt from "./pages/admin/Faresmgt"; 
+
 
 function AppRouter() {
   return (
     <Router>
       <Routes>
-        {/* --- PUBLIC & USER ROUTES --- */}
+        {/* --- PUBLIC ROUTES --- */}
         <Route path="/" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/home" element={<HomePage />} /> 
 
-        <Route path="/operator/dashboard" element={<OperatorDashboardPage />} />
+        {/* --- PASSENGER ROUTE --- */}
+        {/* Users are redirected here after login */}
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/timings" element={<TimingsPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
 
-        {/* --- NEW ADMIN ROUTES --- */}
-        {/* The main dashboard for the new mobile UI */}
+        {/* --- OPERATOR ROUTES --- */}
+        <Route path="/operator/dashboard" element={<OperatorDashboard />} />
+        <Route path="/operator/routes" element={<OperatorRoutesPage />} />
+
+        {/* --- ADMIN ROUTES --- */}
         <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-        
-        {/* The user management page */}
         <Route path="/admin/users" element={<UserManagementPage />} />
-
-        {/* The operator assignment page */}
         <Route path="/admin/operators" element={<AssignOperatorsPage />} />
+        <Route path="/admin/vehicles" element={<Vehicle />} />
+        <Route path="/admin/fares" element={<Faresmgt />} />
         
-        {/* Add other admin routes here as you create them */}
-        {/* e.g., <Route path="/admin/vehicles" element={<VehiclePage />} /> */}
-
-        {/* --- REDIRECT & FALLBACK --- */}
-        {/* Convenience redirect: if a user navigates to "/admin", send them to the dashboard */}
+        {/* --- REDIRECTS & FALLBACK --- */}
+        {/* Redirect /admin to the admin dashboard for convenience */}
         <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
-
-        {/* Fallback to NotFound for any other unknown routes */}
-        <Route path="*" element={<NotFound />} />         
+        {/* Any unknown URL will show the NotFound page */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

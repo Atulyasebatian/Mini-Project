@@ -1,0 +1,109 @@
+/* --- Passenger Payment Page --- */
+:root {
+  --passenger-bg: #f4f5f9;
+  --primary-blue: #2979ff;
+  --primary-red: #d32f2f;
+  --card-bg: #ffffff;
+  --text-dark: #263238;
+  --text-light: #78909c;
+  --border-color: #e0e0e0;
+  --icon-bg-light: #f5f5f5;
+  --icon-bg-orange: #fff3e0;
+}
+.payment-page {
+  background-color: var(--passenger-bg);
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  padding-bottom: 70px;
+}
+/* Re-using header and nav styles from home/timings */
+.passenger-header, .passenger-bottom-nav { /* ... styles ... */ }
+
+/* Main Content */
+.payment-main {
+  padding: 1.5rem;
+}
+.payment-main h2 {
+  font-size: 1.8rem; font-weight: 700; color: var(--text-dark); margin-bottom: 1.5rem;
+}
+.payment-section {
+  margin-bottom: 2rem;
+}
+.payment-section h3 {
+  font-size: 1rem; font-weight: 600; color: var(--text-light); text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+/* Payment Cards */
+.payment-card {
+  display: flex; align-items: center; gap: 1rem;
+  background-color: var(--card-bg); border-radius: 12px;
+  padding: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 0.75rem;
+}
+.card-icon {
+  width: 44px; height: 44px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.upi-icon { background-color: var(--icon-bg-light); color: var(--text-dark); }
+.card-type-icon { background-color: var(--icon-bg-orange); color: #fb8c00; }
+.add-card-icon { background-color: var(--icon-bg-light); color: var(--text-dark); }
+
+.card-details {
+  flex-grow: 1;
+}
+.card-details h4 { font-size: 1rem; font-weight: 600; margin: 0; }
+.card-details p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+
+.add-btn {
+  background-color: #f0f0f0; color: var(--text-dark);
+  border: none; border-radius: 8px; padding: 0.5rem 1rem;
+  font-weight: 500; cursor: pointer;
+}
+.delete-btn {
+  background: none; border: none; color: var(--text-light); cursor: pointer;
+}
+.add-card-prompt {
+  cursor: pointer;
+}
+
+/* Transaction Section */
+.transaction-header {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.transaction-header span {
+  font-size: 0.9rem; color: var(--primary-red); font-weight: 500;
+}
+.transaction-card {
+  background-color: var(--card-bg); border-radius: 12px;
+  padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.transaction-info {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: start;
+}
+.transaction-id { grid-column: 1 / 2; font-size: 0.85rem; color: var(--text-light); }
+.transaction-amount {
+  grid-column: 2 / 3; grid-row: 1 / 4;
+  font-size: 1.5rem; font-weight: 700; color: var(--primary-red);
+}
+.transaction-info h4 {
+  grid-column: 1 / 2; font-size: 1.1rem; font-weight: 600; margin: 0.25rem 0;
+}
+.due-date { grid-column: 1 / 2; font-size: 0.85rem; color: var(--text-light); }
+
+.transaction-actions {
+  border-top: 1px solid var(--border-color);
+  margin-top: 1.5rem; padding-top: 1rem;
+  display: flex; justify-content: space-between;
+}
+.btn-details {
+  background: none; border: none; color: var(--primary-blue);
+  font-weight: 600; cursor: pointer;
+}
+.btn-pay {
+  background-color: var(--primary-red); color: #fff;
+  border: none; border-radius: 8px; padding: 0.75rem 2rem;
+  font-weight: 600; cursor: pointer;
+}

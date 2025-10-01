@@ -1,122 +1,261 @@
-/* General Styling for Passenger Homepage */
-.home-container {
-  background-color: #f4f7f6;
+/* --- Refined Passenger Homepage Styles --- */
+:root {
+  --passenger-bg: #f4f5f9;
+  --primary-blue: #2979ff;
+  --card-bg: #ffffff;
+  --text-dark: #263238;
+  --text-light: #78909c;
+  --border-color: #e0e0e0;
+}
+
+.passenger-home {
+  background-color: var(--passenger-bg);
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
+  padding-bottom: 70px; /* Space for fixed bottom nav */
 }
 
-.home-header {
+/* Header */
+.passenger-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.5rem;
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
-
-.brand-logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #0056b3;
+.passenger-header .brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-blue);
+  font-weight: 600;
 }
-
-.user-menu {
+.passenger-header h1 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+.header-actions {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-
+.header-actions .material-icons {
+  font-size: 24px;
+  color: var(--text-light);
+}
 .logout-btn {
   background: none;
-  border: 1px solid #dc3545;
-  color: #dc3545;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.logout-btn:hover {
-  background-color: #dc3545;
-  color: #fff;
-}
-
-.home-main {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 2rem;
-}
-
-.search-card h2 {
-  margin-top: 0;
-}
-
-.search-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  align-items: flex-end;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #555;
-}
-
-.form-group input {
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-
-.btn-search {
-  grid-column: 1 / -1; /* Span across both columns */
-  background-color: #007bff;
-  color: white;
-  padding: 0.75rem;
   border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
+  color: var(--text-dark);
   cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
   transition: background-color 0.2s;
 }
-
-.btn-search:hover {
-  background-color: #0056b3;
+.logout-btn:hover {
+  background-color: var(--passenger-bg);
 }
 
-.trips-section h2 {
-  margin-bottom: 1.5rem;
-  color: #333;
+/* Main Content */
+.passenger-main {
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+.card {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.trip-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.btn-view-ticket {
-  background-color: #28a745;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 5px;
+/* QR Card */
+.qr-card {
+  text-align: center;
   cursor: pointer;
+}
+.qr-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+.qr-image {
+  max-width: 100px;
+  margin-bottom: 1rem;
+}
+.qr-card h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+.qr-card p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
+/* Fare Card */
+.fare-card h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-group:focus-within {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(41, 121, 255, 0.15);
+}
+.input-group .material-icons {
+  color: var(--text-light);
+}
+.input-group input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  background: none;
+  color: var(--text-dark);
+}
+/* Fix for browser autofill styles */
+.input-group input:-webkit-autofill,
+.input-group input:-webkit-autofill:hover, 
+.input-group input:-webkit-autofill:focus, 
+.input-group input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--text-dark) !important;
+    -webkit-box-shadow: 0 0 0 30px var(--card-bg) inset !important;
+    box-shadow: 0 0 0 30px var(--card-bg) inset !important;
+}
+
+.btn-primary {
+  width: 100%;
+  background-color: var(--primary-blue);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.2s;
+}
+.btn-primary:hover {
+  background-color: #1c68f3;
+}
+.btn-primary:disabled {
+  background-color: #a4c3ff;
+  cursor: not-allowed;
+}
+
+.amount-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.9rem;
+  font-weight: 500;
+}
+.amount-display .rupee-symbol {
+  color: var(--text-dark);
+}
+.amount-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Recent Trips */
+.recent-trips h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.trip-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+.trip-item:last-child {
+  margin-bottom: 0;
+}
+.trip-icon {
+  background-color: #e3f2fd;
+  color: var(--primary-blue);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.trip-details {
+  flex-grow: 1;
+}
+.trip-route {
+  font-weight: 500;
+  color: var(--text-dark);
+  margin: 0;
+}
+.trip-date {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin: 0;
+}
+.trip-fare {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+.no-trips {
+  color: var(--text-light);
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Bottom Navigation */
+.passenger-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background: var(--card-bg);
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  padding-top: 0.5rem;
+}
+.passenger-bottom-nav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-light);
+  font-size: 0.75rem;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+.nav-item .nav-label {
+  margin-top: 2px;
+}
+.passenger-bottom-nav .nav-item.active {
+  color: var(--primary-blue);
+  font-weight: 500;
 }
