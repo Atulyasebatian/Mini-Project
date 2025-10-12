@@ -1,56 +1,59 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode"; // Correct import
+import axios from "axios";
+import jwtDecode from "jwt-decode"; 
+import { Spinner } from "react-bootstrap";
 import "../styles/login.css";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+      const res = await axios.post("http://localhost:3000/api/auth/login", {
+        email,
+        password,
       });
 
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.msg || "Failed to log in");
-
-      const token = data.token;
+      const { token } = res.data;
       localStorage.setItem("token", token);
 
-      const decodedToken = jwt_decode(token); // Use correct function
+      const decodedToken = jwtDecode(token);
       const userRole = decodedToken.user.role;
 
       if (userRole === "Admin") navigate("/admin/dashboard");
       else if (userRole === "Operator") navigate("/operator/dashboard");
       else if (userRole === "Passenger") navigate("/home");
       else setError("Login successful, but role is unrecognized.");
+
     } catch (err) {
+      const message = err.response?.data?.msg || "An unexpected error occurred. Please try again.";
+      setError(message);
       console.error(err);
-      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="login-wrapper" style={{ backgroundImage: `url('/rr-modified.jpg')` }}>
+    <div className="login-wrapper" style={{ backgroundImage: `url('/t5.jpg')` }}>
       <div className="login-card glass-effect">
         <h1 className="brand">
-          <span className="material-icons">directions_bus</span> TransitGo
+          <span className="material-icons">directions_bus</span> Transit Go
         </h1>
         <h2 className="welcome">Welcome Back</h2>
         <p className="subtitle">Log in to your account</p>
 
         <form onSubmit={handleLogin}>
-          {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+          {error && <p className="error-message">{error}</p>}
 
           <label htmlFor="email">Email Address</label>
           <input
@@ -60,6 +63,7 @@ function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            disabled={loading}
           />
 
           <div className="password-group">
@@ -73,9 +77,12 @@ function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            disabled={loading}
           />
 
-          <button type="submit" className="btn-primary">Login</button>
+          <button type="submit" className="btn-primary" disabled={loading}>
+            {loading ? <Spinner as="span" animation="border" size="sm" /> : "Login"}
+          </button>
         </form>
 
         <p className="signup">Don't have an account? <Link to="/signup">Sign Up</Link></p>

@@ -9,8 +9,8 @@ import fareRoutes from './routes/fares.js';
 import collectionsRoutes from './routes/collections.js';
 import assignmentRoutes from './routes/assignments.js';
 import dashboardRoutes from './routes/dashboard.js';
-
-// Load environment variables
+import tripRoutes from './routes/trips.js';
+import reportRoutes from './routes/reports.js';
 
 
 dotenv.config();
@@ -20,20 +20,20 @@ app.use(cors());
 app.use(express.json());
 
 // Connect MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB Connected!"))
 .catch((err) => console.error("MongoDB connection error:", err));
 
-// Use the routes
-app.use("/api/dashboard", dashboardRoutes);
+// Use all the correct routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/vehicles", vehicleRoutes); 
 app.use("/api/fares", fareRoutes);
 app.use("/api/collections", collectionsRoutes);
 app.use("/api/assignments", assignmentRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/trips", tripRoutes);
+app.use("/api/reports", reportRoutes);
+
 
 app.listen(5000, () => console.log(`Server running on port 5000`));

@@ -1,13 +1,11 @@
-/* File: src/pages/styles/login.css */
-
 .login-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
   background-size: cover;
-  background-position: center;
-  font-family: 'Poppins', sans-serif; /* You might want to add this font to your main index.html for it to work */
+  background-position: left;
 }
 
 .glass-effect {
@@ -103,10 +101,30 @@ input:focus {
   cursor: pointer;
   transition: background-color 0.2s;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-primary:hover {
   background-color: #0b5ed7;
+}
+
+.btn-primary:disabled {
+  background-color: #0b5ed7;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background-color: rgba(255, 59, 48, 0.2);
+  color: #ffbaba;
+  border: 1px solid rgba(255, 59, 48, 0.5);
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
 }
 
 .divider {

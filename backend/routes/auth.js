@@ -49,10 +49,13 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ msg: 'Invalid Credentials' });
         }
         
+        // --- THE CHANGE IS HERE ---
+        // Add the user's full name to the token payload
         const payload = {
             user: {
                 id: user.id,
-                role: user.role
+                role: user.role,
+                fullName: user.fullName // ADD THIS LINE
             },
         };
 

@@ -1,109 +1,96 @@
-/* --- Passenger Payment Page --- */
+
+/* --- Creative Passenger Payment Page --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 :root {
-  --passenger-bg: #f4f5f9;
-  --primary-blue: #2979ff;
-  --primary-red: #d32f2f;
+  --payment-bg: #f4f5f9;
+  --primary-blue: #1e88e5;
+  --primary-red: #e53935;
   --card-bg: #ffffff;
   --text-dark: #263238;
   --text-light: #78909c;
-  --border-color: #e0e0e0;
-  --icon-bg-light: #f5f5f5;
-  --icon-bg-orange: #fff3e0;
+  --soft-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 .payment-page {
-  background-color: var(--passenger-bg);
+  background-color: var(--payment-bg);
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
   padding-bottom: 70px;
 }
-/* Re-using header and nav styles from home/timings */
-.passenger-header, .passenger-bottom-nav { /* ... styles ... */ }
+/* Header and Nav styles are assumed to be consistent from other pages */
 
 /* Main Content */
-.payment-main {
-  padding: 1.5rem;
-}
-.payment-main h2 {
-  font-size: 1.8rem; font-weight: 700; color: var(--text-dark); margin-bottom: 1.5rem;
-}
-.payment-section {
-  margin-bottom: 2rem;
-}
-.payment-section h3 {
-  font-size: 1rem; font-weight: 600; color: var(--text-light); text-transform: uppercase;
-  margin-bottom: 0.75rem;
-}
+.payment-main { padding: 1.5rem; }
 
-/* Payment Cards */
-.payment-card {
+/* Balance Section */
+.balance-card {
+  background: linear-gradient(45deg, var(--primary-blue), #42a5f5);
+  color: #fff;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(30, 136, 229, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+.shine-effect {
+  position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 60%);
+  transform: rotate(30deg);
+}
+.balance-card span { font-size: 0.9rem; opacity: 0.8; }
+.balance-card h2 { font-size: 2.5rem; font-weight: 700; margin: 0.25rem 0 1.5rem 0; }
+.balance-actions { display: flex; gap: 0.75rem; }
+
+/* Pending Transaction Section */
+.pending-section { margin-top: 2rem; }
+.pending-card {
+  background-color: #fffbe6; border: 1px solid #ffe58f;
+  border-radius: 12px; padding: 1rem;
+}
+.pending-header {
+  display: flex; align-items: center; gap: 0.5rem;
+  color: #faad14; font-weight: 600; font-size: 0.9rem;
+}
+.pending-details {
+  display: flex; justify-content: space-between; align-items: center;
+  margin: 0.75rem 0;
+}
+.pending-details p { margin: 0; color: var(--text-light); font-size: 0.9rem; }
+.pending-details h4 { margin: 0; color: var(--primary-red); font-weight: 700; font-size: 1.25rem; }
+
+/* Payment Methods Section */
+.methods-section { margin-top: 2rem; }
+.methods-section h2 {
+  font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;
+  padding-left: 0.75rem; border-left: 4px solid var(--primary-blue);
+}
+.method-card {
   display: flex; align-items: center; gap: 1rem;
   background-color: var(--card-bg); border-radius: 12px;
-  padding: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin-bottom: 0.75rem;
+  padding: 1rem; margin-bottom: 0.75rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
 }
-.card-icon {
-  width: 44px; height: 44px; border-radius: 8px;
+.method-card:hover {
+  transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.method-icon {
+  width: 44px; height: 44px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+  color: #fff; flex-shrink: 0;
 }
-.upi-icon { background-color: var(--icon-bg-light); color: var(--text-dark); }
-.card-type-icon { background-color: var(--icon-bg-orange); color: #fb8c00; }
-.add-card-icon { background-color: var(--icon-bg-light); color: var(--text-dark); }
-
-.card-details {
-  flex-grow: 1;
-}
-.card-details h4 { font-size: 1rem; font-weight: 600; margin: 0; }
-.card-details p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
-
-.add-btn {
-  background-color: #f0f0f0; color: var(--text-dark);
-  border: none; border-radius: 8px; padding: 0.5rem 1rem;
-  font-weight: 500; cursor: pointer;
-}
+.method-details { flex-grow: 1; }
+.method-details h4 { font-size: 1rem; font-weight: 500; margin: 0; color: var(--text-dark); }
+.method-details p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
 .delete-btn {
   background: none; border: none; color: var(--text-light); cursor: pointer;
 }
-.add-card-prompt {
-  cursor: pointer;
+.add-method {
+  border: 2px dashed var(--border-color);
+  background-color: var(--payment-bg); justify-content: center;
+  color: var(--text-light); font-weight: 500; cursor: pointer;
+  box-shadow: none;
 }
-
-/* Transaction Section */
-.transaction-header {
-  display: flex; justify-content: space-between; align-items: center;
-}
-.transaction-header span {
-  font-size: 0.9rem; color: var(--primary-red); font-weight: 500;
-}
-.transaction-card {
-  background-color: var(--card-bg); border-radius: 12px;
-  padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-.transaction-info {
-  display: grid; grid-template-columns: 1fr auto;
-  align-items: start;
-}
-.transaction-id { grid-column: 1 / 2; font-size: 0.85rem; color: var(--text-light); }
-.transaction-amount {
-  grid-column: 2 / 3; grid-row: 1 / 4;
-  font-size: 1.5rem; font-weight: 700; color: var(--primary-red);
-}
-.transaction-info h4 {
-  grid-column: 1 / 2; font-size: 1.1rem; font-weight: 600; margin: 0.25rem 0;
-}
-.due-date { grid-column: 1 / 2; font-size: 0.85rem; color: var(--text-light); }
-
-.transaction-actions {
-  border-top: 1px solid var(--border-color);
-  margin-top: 1.5rem; padding-top: 1rem;
-  display: flex; justify-content: space-between;
-}
-.btn-details {
-  background: none; border: none; color: var(--primary-blue);
-  font-weight: 600; cursor: pointer;
-}
-.btn-pay {
-  background-color: var(--primary-red); color: #fff;
-  border: none; border-radius: 8px; padding: 0.75rem 2rem;
-  font-weight: 600; cursor: pointer;
+.add-method .add-icon {
+  width: auto; height: auto; background: none; color: var(--text-light);
 }

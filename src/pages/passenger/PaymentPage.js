@@ -1,110 +1,94 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import jwtDecode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
+// These imports are now the single source of truth for your header and nav components
+import PassengerHeader from '../../components/PassengerHeader';
+import PassengerBottomNav from '../../components/PassengerBottomNav';
 import '../../styles/payment.css';
 
-// Reusable Header Component
-const PassengerHeader = () => {
-  return (
-    <header className="passenger-header">
-      <div className="brand">
-        <span className="material-icons">directions_bus</span>
-        <h1>TransitGo</h1>
-      </div>
-      <div className="header-actions">
-        <span className="material-icons">notifications</span>
-        <img src="https://i.pravatar.cc/150?img=1" alt="User" className="profile-pic" />
-      </div>
-    </header>
-  );
-};
-
-// Reusable Bottom Navigation Component (with fixes)
-const PassengerBottomNav = () => {
-  const location = useLocation();
-  const isActive = (path) => location.pathname === path;
-
-  return (
-    <nav className="passenger-bottom-nav">
-      <Link to="/home" className={`nav-item ${isActive('/home') ? 'active' : ''}`}>
-        <span className="material-icons">home</span><span className="nav-label">Home</span>
-      </Link>
-      <Link to="/timings" className={`nav-item ${isActive('/timings') ? 'active' : ''}`}>
-        <span className="material-icons">schedule</span><span className="nav-label">Timing</span>
-      </Link>
-      <Link to="/payment" className={`nav-item ${isActive('/payment') ? 'active' : ''}`}>
-        <span className="material-icons">payment</span><span className="nav-label">Payment</span>
-      </Link>
-      <Link to="#" className="nav-item">
-        <span className="material-icons">history</span><span className="nav-label">History</span>
-      </Link>
-      <Link to="#" className="nav-item">
-        <span className="material-icons">feedback</span><span className="nav-label">Feedback</span>
-      </Link>
-    </nav>
-  );
-};
-
 function PaymentPage() {
-  // --- LOGIC RESTORED: All state and functions are back ---
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  const [balance, setBalance] = useState(1250.75);
   const [paymentMethods, setPaymentMethods] = useState([
-    { id: 1, type: 'Credit Card', details: 'Visa .... 4567' },
-    { id: 2, type: 'Debit Card', details: 'Mastercard .... 8901' },
+    { id: 1, type: 'Credit Card', details: 'Visa .... 4567', icon: 'credit_card', color: '#ff9800' },
   ]);
   const [pendingTransaction, setPendingTransaction] = useState({
     id: '#FN20240721',
-    reason: 'Travel without a valid ticket',
+    reason: 'Fine for ticketless travel',
     dueDate: '2024-08-01',
     amount: 50.00,
   });
   const [showAddCardModal, setShowAddCardModal] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate('/');
+      return;
+    }
+    const decodedToken = jwtDecode(token);
+    setUser({ name: decodedToken.user.fullName });
+
+    // TODO: Fetch actual balance and payment methods from API
+  }, []);
+
   const handleDeleteCard = (cardId) => {
     if (window.confirm("Are you sure you want to delete this card?")) {
-      setPaymentMethods(paymentMethods.filter(card => card.id !== cardId));
+      // Logic to update state would go here if it were not a simulation
     }
   };
   
   const handleAddCard = () => {
-    const newCard = {
-      id: Date.now(),
-      type: 'Credit Card',
-      details: `Visa .... ${Math.floor(1000 + Math.random() * 9000)}`
-    };
-    setPaymentMethods([...paymentMethods, newCard]);
     setShowAddCardModal(false);
+    // Logic to update state would go here
   };
   
   const handlePayNow = () => {
-    alert(`Payment of ₹${pendingTransaction.amount.toFixed(2)} successful!`);
-    setPendingTransaction(null);
+    alert(`Simulating payment of ₹${pendingTransaction.amount.toFixed(2)}...`);
   };
 
   return (
     <div className="payment-page">
-      <PassengerHeader />
-      {/* --- RENDER LOGIC RESTORED --- */}
+      <PassengerHeader user={user} />
       <main className="payment-main">
-        <h2>Payment Methods</h2>
-        
-        <section className="payment-section">
-          <h3>UPI</h3>
-          <div className="payment-card">
-            <div className="card-icon upi-icon"><span className="material-icons">account_balance</span></div>
-            <div className="card-details">
-              <h4>Pay with UPI</h4>
-              <p>Pay directly from your bank account</p>
+        <section className="balance-section">
+          <div className="balance-card">
+            <div className="shine-effect"></div>
+            <span>Your Balance</span>
+            <h2>₹{balance.toLocaleString('en-IN')}</h2>
+            <div className="balance-actions">
+              <Button variant="light" size="sm">Add Money</Button>
+              <Button variant="outline-light" size="sm">History</Button>
             </div>
-            <button className="add-btn">Add</button>
           </div>
         </section>
 
-        <section className="payment-section">
-          <h3>Cards</h3>
+        {pendingTransaction && (
+          <section className="pending-section">
+            <div className="pending-card">
+              <div className="pending-header">
+                <span className="material-icons">error_outline</span>
+                <span>Payment Pending</span>
+              </div>
+              <div className="pending-details">
+                <p>{pendingTransaction.reason}</p>
+                <h4>₹{pendingTransaction.amount.toFixed(2)}</h4>
+              </div>
+              <Button variant="danger" className="w-100" onClick={handlePayNow}>Pay Now</Button>
+            </div>
+          </section>
+        )}
+
+        <section className="methods-section">
+          <h2>Payment Methods</h2>
           {paymentMethods.map(card => (
-            <div key={card.id} className="payment-card saved-card">
-              <div className="card-icon card-type-icon"><span className="material-icons">credit_card</span></div>
-              <div className="card-details">
+            <div key={card.id} className="method-card">
+              <div className="method-icon" style={{ backgroundColor: card.color }}>
+                <span className="material-icons">{card.icon}</span>
+              </div>
+              <div className="method-details">
                 <h4>{card.type}</h4>
                 <p>{card.details}</p>
               </div>
@@ -113,54 +97,30 @@ function PaymentPage() {
               </button>
             </div>
           ))}
-          <div className="payment-card add-card-prompt" onClick={() => setShowAddCardModal(true)}>
-            <div className="card-icon add-card-icon"><span className="material-icons">add_card</span></div>
-            <div className="card-details">
-              <h4>Add a Card</h4>
-              <p>Add a new card for quick payments</p>
-            </div>
-            <button className="add-btn">Add</button>
+          <div className="method-card add-method" onClick={() => setShowAddCardModal(true)}>
+            <div className="add-icon"><span className="material-icons">add</span></div>
+            <p>Add a new Card</p>
           </div>
         </section>
-
-        {pendingTransaction && (
-          <section className="payment-section">
-            <div className="transaction-header">
-              <h3>Transaction</h3>
-              <span>Payment Pending: <strong>₹{pendingTransaction.amount.toFixed(2)}</strong></span>
-            </div>
-            <div className="transaction-card">
-              <div className="transaction-info">
-                <p className="transaction-id">Transaction ID: {pendingTransaction.id}</p>
-                <h4>{pendingTransaction.reason}</h4>
-                <p className="due-date">Due: {pendingTransaction.dueDate}</p>
-              </div>
-              <div className="transaction-amount">₹{pendingTransaction.amount.toFixed(2)}</div>
-              <div className="transaction-actions">
-                <button className="btn-details">View Details</button>
-                <button className="btn-pay" onClick={handlePayNow}>Pay Now</button>
-              </div>
-            </div>
-          </section>
-        )}
       </main>
+      
+      {/* This now correctly uses the imported component */}
       <PassengerBottomNav />
 
       <Modal show={showAddCardModal} onHide={() => setShowAddCardModal(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Add New Card</Modal.Title>
-        </Modal.Header>
+        <Modal.Header closeButton><Modal.Title>Add New Card</Modal.Title></Modal.Header>
         <Modal.Body>
-          <p>This is a simulation. In a real application, a secure form would be here.</p>
+          <p>This is a simulation. A secure form would be here in a real application.</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowAddCardModal(false)}>Close</Button>
-          <Button variant="primary" onClick={handleAddCard}>Add Card</Button>
+          <Button variant="primary" onClick={handleAddCard}>Add Simulated Card</Button>
         </Modal.Footer>
       </Modal>
     </div>
   );
 }
 
-export default PaymentPage;
+// --- REMOVED: The duplicate definition of PassengerBottomNav is now gone ---
 
+export default PaymentPage;

@@ -33,8 +33,8 @@ const PassengerBottomNav = () => {
         <span className="material-icons">schedule</span><span className="nav-label">Timing</span>
       </Link>
       <Link to="/Payment" className="nav-item"><span className="material-icons">payment</span><span className="nav-label">Payment</span></Link>
-      <Link to="#" className="nav-item"><span className="material-icons">history</span><span className="nav-label">History</span></Link>
-      <Link to="#" className="nav-item"><span className="material-icons">report</span><span className="nav-label">Report</span></Link>
+      <Link to="/History" className="nav-item"><span className="material-icons">history</span><span className="nav-label">History</span></Link>
+      <Link to="/Report" className="nav-item"><span className="material-icons">report</span><span className="nav-label">Report</span></Link>
     </nav>
   );
 };
@@ -59,7 +59,7 @@ function TimingsPage() {
       }
 
       try {
-        const res = await axios.get("http://localhost:5000/api/fares", {
+        const res = await axios.get("http://localhost:3000/api/fares", {
           headers: { Authorization: `Bearer ${token}` }
         });
         setRoutes(res.data);

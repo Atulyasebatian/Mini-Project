@@ -20,7 +20,7 @@ function SignupPage() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/auth/signup", {
+      const res = await fetch("http://localhost:5000/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,7 +41,7 @@ function SignupPage() {
     }
   };
 
-  const backgroundImageUrl = "/rr-modified.jpg";
+  const backgroundImageUrl = "/t4.PNG";
 
   return (
     <div
@@ -130,7 +130,7 @@ function SignupPage() {
         {/* Footer */}
         <p className="text-center text-light mt-3">
           Already have an account?{" "}
-          <Link to="/" className="fw-bold text-white text-decoration-none">
+          <Link to="/login" className="fw-bold text-white text-decoration-none">
             Log In
           </Link>
         </p>
